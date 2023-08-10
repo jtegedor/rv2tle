@@ -122,7 +122,7 @@ def rvel(r, v):
 
         # vis-viva equation
         temp = 2 / r - (rdot*rdot + rfdot*rfdot) / (xke * xke)
-        adop = 1 / temp
+        aodp = 1 / temp
 
         xn = xke * aodp ** (-1.5)
         if math.fabs(a2-pl) < 1e-13:
@@ -133,9 +133,9 @@ def rvel(r, v):
     # fixed and are used in the second loop.
 
     # preliminary values for the second loops
-    ecose = 1 - r / adop
+    ecose = 1 - r / aodp
     esine = r * rdot / (xke * np.sqrt(aodp))  # needed for Kepler's eqn
-    elsq = 1 - pl / adop  # intermediate eccentricity squared
+    elsq = 1 - pl / aodp  # intermediate eccentricity squared
     xlcof = .125 * a3ovk2 * sinio * (3 + 5 * cosio) / (1 + cosio)
     aycof = 0.25 * a3ovk2 * sinio
     temp1 = esine / (1 + np.sqrt(1-elsq))
@@ -194,7 +194,7 @@ def rvel(r, v):
         a0 = aodp * (1.0 - d0)
         d1 = temp / (a1*a1)
         a1 = a0 / (1 - d1 / 3 - d1*d1 - 134 * d1*d1*d1 / 81)
-        if math.fabs(a2-a1) < 1e-3:
+        if math.fabs(a2-a1) < 1e-13:
             break
 
     xno = xke * a1 ** (-1.5)
